@@ -2,6 +2,26 @@ local keymap = vim.keymap
 local api = vim.api
 local uv = vim.loop
 
+local map = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
+
+-- Telescope key mappings
+map('n', 'ff', '<cmd>Telescope find_files<cr>', opts)
+map('n', 'gg', '<cmd>Telescope live_grep<cr>', opts)
+map('n', 'gggg', '<cmd>Telescope buffers<cr>', opts)
+map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', opts)
+
+
+-- Harpoon key mappings
+map('n', 'hm', '<cmd>lua require("harpoon.mark").add_file()<CR>', opts) -- Add mark
+map('n', 'hn', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', opts) -- Show marks menu
+map('n', 'h1', '<cmd>lua require("harpoon.ui").nav_file(1)<CR>', opts) -- Navigate to mark 1
+map('n', 'h2', '<cmd>lua require("harpoon.ui").nav_file(2)<CR>', opts) -- Navigate to mark 2
+map('n', 'h3', '<cmd>lua require("harpoon.ui").nav_file(3)<CR>', opts) -- Navigate to mark 3
+map('n', 'h4', '<cmd>lua require("harpoon.ui").nav_file(4)<CR>', opts) -- Navigate to mark 4
+map('n', 'h5', '<cmd>lua require("harpoon.ui").nav_file(5)<CR>', opts) -- Navigate to mark 4
+map('n', 'h6', '<cmd>lua require("harpoon.ui").nav_file(6)<CR>', opts) -- Navigate to mark 4
+map('n', 'h7', '<cmd>lua require("harpoon.ui").nav_file(7)<CR>', opts) -- Navigate to mark 4
 -- Save key strokes (now we do not need to press shift to enter command mode).
 keymap.set({ "n", "x" }, ";", ":")
 
@@ -79,7 +99,7 @@ keymap.set({ "n", "x" }, "L", "g_")
 -- to reselect previous visual area, see https://superuser.com/q/310417/736190
 keymap.set("x", "<", "<gv")
 keymap.set("x", ">", ">gv")
-
+-- keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
 -- Edit and reload nvim config file quickly
 keymap.set("n", "<leader>ev", "<cmd>tabnew $MYVIMRC <bar> tcd %:h<cr>", {
   silent = true,
@@ -119,7 +139,8 @@ keymap.set("t", "<Esc>", [[<c-\><c-n>]])
 -- Toggle spell checking
 keymap.set("n", "<F11>", "<cmd>set spell!<cr>", { desc = "toggle spell" })
 keymap.set("i", "<F11>", "<c-o><cmd>set spell!<cr>", { desc = "toggle spell" })
-
+keymap.set("i", "jk", "<ESC>", {noremap=true,silent=true})
+keymap.set("i", "kj", "<ESC>", {noremap=true,silent=true})
 -- Change text without putting it into the vim register,
 -- see https://stackoverflow.com/q/54255/6064933
 keymap.set("n", "c", '"_c')
@@ -165,13 +186,10 @@ keymap.set("n", "<left>", "<c-w>h")
 keymap.set("n", "<Right>", "<C-W>l")
 keymap.set("n", "<Up>", "<C-W>k")
 keymap.set("n", "<Down>", "<C-W>j")
-
 -- Text objects for URL
 keymap.set({ "x", "o" }, "iu", "<cmd>call text_obj#URL()<cr>", { desc = "URL text object" })
-
 -- Text objects for entire buffer
 keymap.set({ "x", "o" }, "iB", "<cmd>call text_obj#Buffer()<cr>", { desc = "buffer text object" })
-
 -- Do not move my cursor when joining lines.
 keymap.set("n", "J", function()
   vim.cmd([[
@@ -181,7 +199,6 @@ keymap.set("n", "J", function()
 end, {
   desc = "join line",
 })
-
 keymap.set("n", "gJ", function()
   -- we must use `normal!`, otherwise it will trigger recursive mapping
   vim.cmd([[
@@ -210,6 +227,17 @@ keymap.set("c", "<C-A>", "<HOME>")
 
 -- Delete the character to the right of the cursor
 keymap.set("i", "<C-D>", "<DEL>")
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("n", "J", "mzJ`z")
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+vim.keymap.set("x", "<leader>p", [["_dP]])
+vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set("n", "<leader>Y", [["+Y]])
+vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
+vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.api.nvim_set_keymap('n', '<leader>u', ':UndotreeToggle<CR>', { noremap = true, silent = true })
 
 keymap.set("n", "<leader>cb", function()
   local cnt = 0
