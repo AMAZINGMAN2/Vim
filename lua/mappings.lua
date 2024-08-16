@@ -8,7 +8,7 @@ local opts = { noremap = true, silent = true }
 -- Telescope key mappings
 map('n', 'ff', '<cmd>Telescope find_files<cr>', opts)
 map('n', 'gg', '<cmd>Telescope live_grep<cr>', opts)
-map('n', 'gggg', '<cmd>Telescope buffers<cr>', opts)
+map('n', 'ggg', '<cmd>Telescope buffers<cr>', opts)
 map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', opts)
 
 

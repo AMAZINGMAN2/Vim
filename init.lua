@@ -62,7 +62,6 @@ require("lazy").setup({
     end,
   },
 
-  -- Add Telescope.nvim
   {
     "nvim-telescope/telescope.nvim",
     requires = {
