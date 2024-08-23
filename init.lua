@@ -4,6 +4,9 @@ vim.wo.relativenumber = true
 vim.wo.number = true
 vim.wo.spell = true
 vim.o.spelllang = "en_nz"
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4 
+vim.g.codeium_os = "Windows"
 -- bootstrap lazy and all plugins
 vim.g.loaded_netrw = 0
 vim.g.loaded_netrwPlugin = 0
@@ -61,7 +64,6 @@ require("lazy").setup({
       })
     end,
   },
-
   {
     "nvim-telescope/telescope.nvim",
     requires = {

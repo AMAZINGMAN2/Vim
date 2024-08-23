@@ -4,7 +4,10 @@ return {
     -- event = 'BufWritePre', -- uncomment for format on save
     opts = require "configs.conform",
   },
-
+{
+  'Exafunction/codeium.vim',
+  event = 'BufEnter'
+},
   -- These are some examples, uncomment them if you want to see them work!
   {
     "neovim/nvim-lspconfig",
@@ -12,7 +15,6 @@ return {
       require "configs.lspconfig"
     end,
   },
-
   {
   	"nvim-treesitter/nvim-treesitter",
   	opts = {

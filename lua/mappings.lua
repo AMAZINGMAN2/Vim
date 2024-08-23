@@ -7,24 +7,25 @@ local opts = { noremap = true, silent = true }
 
 -- Telescope key mappings
 map('n', 'ff', '<cmd>Telescope find_files<cr>', opts)
-map('n', 'gg', '<cmd>Telescope live_grep<cr>', opts)
+map('n', 'gr', '<cmd>Telescope live_grep<cr>', opts)
 map('n', 'ggg', '<cmd>Telescope buffers<cr>', opts)
 map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', opts)
 
 
 -- Harpoon key mappings
-map('n', 'hm', '<cmd>lua require("harpoon.mark").add_file()<CR>', opts) -- Add mark
-map('n', 'hn', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', opts) -- Show marks menu
-map('n', 'h1', '<cmd>lua require("harpoon.ui").nav_file(1)<CR>', opts) -- Navigate to mark 1
-map('n', 'h2', '<cmd>lua require("harpoon.ui").nav_file(2)<CR>', opts) -- Navigate to mark 2
-map('n', 'h3', '<cmd>lua require("harpoon.ui").nav_file(3)<CR>', opts) -- Navigate to mark 3
-map('n', 'h4', '<cmd>lua require("harpoon.ui").nav_file(4)<CR>', opts) -- Navigate to mark 4
-map('n', 'h5', '<cmd>lua require("harpoon.ui").nav_file(5)<CR>', opts) -- Navigate to mark 4
-map('n', 'h6', '<cmd>lua require("harpoon.ui").nav_file(6)<CR>', opts) -- Navigate to mark 4
-map('n', 'h7', '<cmd>lua require("harpoon.ui").nav_file(7)<CR>', opts) -- Navigate to mark 4
+map('n', '<leader>m', '<cmd>lua require("harpoon.mark").add_file()<CR>', opts) -- Add mark
+map('n', '<leader>h', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', opts) -- Show marks menu
+map('n', '<leader>1', '<cmd>lua require("harpoon.ui").nav_file(1)<CR>', opts) -- Navigate to mark 1
+map('n', '<leader>2', '<cmd>lua require("harpoon.ui").nav_file(2)<CR>', opts) -- Navigate to mark 2
+map('n', '<leader>3', '<cmd>lua require("harpoon.ui").nav_file(3)<CR>', opts) -- Navigate to mark 3
+map('n', '<leader>4', '<cmd>lua require("harpoon.ui").nav_file(4)<CR>', opts) -- Navigate to mark 4
+map('n', '<leader>5', '<cmd>lua require("harpoon.ui").nav_file(5)<CR>', opts) -- Navigate to mark 5
+map('n', '<leader>6', '<cmd>lua require("harpoon.ui").nav_file(6)<CR>', opts) -- Navigate to mark 6
+map('n', '<leader>7', '<cmd>lua require("harpoon.ui").nav_file(7)<CR>', opts) -- Navigate to mark 7
 -- Save key strokes (now we do not need to press shift to enter command mode).
 keymap.set({ "n", "x" }, ";", ":")
-
+--map mt to run !make test
+map('n', 'mt', '<cmd>!make test<cr>', opts)
 -- Turn the word under cursor to upper case
 keymap.set("i", "<c-u>", "<Esc>viwUea")
 
