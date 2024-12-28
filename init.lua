@@ -1,18 +1,26 @@
 vim.g.base46_cache = vim.fn.stdpath "data" .. "/nvchad/base46/"
 vim.g.mapleader = " "
+vim.g.codeium_enabled = false
 vim.wo.relativenumber = true
 vim.wo.number = true
 vim.wo.spell = true
 vim.o.spelllang = "en_nz"
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4 
-vim.g.codeium_os = "Windows"
 -- bootstrap lazy and all plugins
 vim.g.loaded_netrw = 0
 vim.g.loaded_netrwPlugin = 0
+vim.g.codeium_os = "Linux"
+-- bootstrap lazy and all plugins
+vim.g.loaded_netrw = 0
+vim.api.nvim_create_autocmd("BufEnter", {
+    callback = function()
+        require('cmp').setup.buffer { enabled = true }
+    end
+})
+
+vim.g.loaded_netrwPlugin = 0
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
-vim.env.PYTHONPATH = 'E:\\Python\\Packages;' .. (vim.env.PYTHONPATH or '')
-vim.env.PATH = 'C:\\Documents\\pipEnviroment\venv;' .. (vim.env.PATH or '')
 if not vim.uv.fs_stat(lazypath) then
   local repo = "https://github.com/folke/lazy.nvim.git"
   vim.fn.system { "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath }
@@ -41,6 +49,7 @@ require("lazy").setup({
     end,
   },
 
+{ 'wakatime/vim-wakatime', lazy = false },
   -- Add Harpoon
   {
     "ThePrimeagen/harpoon",

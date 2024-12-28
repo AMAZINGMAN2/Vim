@@ -8,6 +8,7 @@ local opts = { noremap = true, silent = true }
 -- Telescope key mappings
 map('n', 'ff', '<cmd>Telescope find_files<cr>', opts)
 map('n', 'gr', '<cmd>Telescope live_grep<cr>', opts)
+map('n', 'gre', '<cmd>Telescope live_grep<cr>', opts)
 map('n', 'ggg', '<cmd>Telescope buffers<cr>', opts)
 map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', opts)
 
@@ -100,6 +101,7 @@ keymap.set({ "n", "x" }, "L", "g_")
 -- to reselect previous visual area, see https://superuser.com/q/310417/736190
 keymap.set("x", "<", "<gv")
 keymap.set("x", ">", ">gv")
+keymap.set("n","<leader>j", "<cmd>NvimTreeToggle<CR>")
 -- keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
 -- Edit and reload nvim config file quickly
 keymap.set("n", "<leader>ev", "<cmd>tabnew $MYVIMRC <bar> tcd %:h<cr>", {
@@ -151,6 +153,7 @@ keymap.set("x", "c", '"_c')
 
 -- Remove trailing whitespace characters
 keymap.set("n", "<leader><space>", "<cmd>StripTrailingWhitespace<cr>", { desc = "remove trailing space" })
+--keymap.set("n", "<leader><space>", "<cmd>StripTrailingWhitespace<cr>", { desc = "remove trailing space" })
 
 -- check the syntax group of current cursor position
 keymap.set("n", "<leader>st", "<cmd>call utils#SynGroup()<cr>", { desc = "check syntax group" })
