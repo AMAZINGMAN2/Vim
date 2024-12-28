@@ -1,9 +1,6 @@
 -- This file needs to have same structure as nvconfig.lua 
 -- https://github.com/NvChad/ui/blob/v2.5/lua/nvconfig.lua
-<<<<<<< HEAD
-=======
 
->>>>>>> 8928064 (changed to linux and changed a few keybinds)
 
 ---@type ChadrcConfig
 local M = {}
