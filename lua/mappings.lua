@@ -152,7 +152,6 @@ keymap.set("n", "cc", '"_cc')
 keymap.set("x", "c", '"_c')
 
 -- Remove trailing whitespace characters
-keymap.set("n", "<leader><space>", "<cmd>StripTrailingWhitespace<cr>", { desc = "remove trailing space" })
 --keymap.set("n", "<leader><space>", "<cmd>StripTrailingWhitespace<cr>", { desc = "remove trailing space" })
 
 -- check the syntax group of current cursor position
@@ -167,11 +166,6 @@ keymap.set("n", "<leader>cl", "<cmd>call utils#ToggleCursorCol()<cr>", { desc = 
 -- Move current line up and down
 keymap.set("n", "<A-k>", '<cmd>call utils#SwitchLine(line("."), "up")<cr>', { desc = "move line up" })
 keymap.set("n", "<A-j>", '<cmd>call utils#SwitchLine(line("."), "down")<cr>', { desc = "move line down" })
-
--- Move current visual-line selection up and down
-keymap.set("x", "<A-k>", '<cmd>call utils#MoveSelection("up")<cr>', { desc = "move selection up" })
-
-keymap.set("x", "<A-j>", '<cmd>call utils#MoveSelection("down")<cr>', { desc = "move selection down" })
 
 -- Replace visual selection with text in register, but not contaminate the register,
 -- see also https://stackoverflow.com/q/10723700/6064933.
@@ -225,9 +219,6 @@ keymap.set("i", "<A-;>", "<Esc>miA;<Esc>`ii")
 -- Go to the beginning and end of current line in insert mode quickly
 keymap.set("i", "<C-A>", "<HOME>")
 keymap.set("i", "<C-E>", "<END>")
-
--- Go to beginning of command in command-line mode
-keymap.set("c", "<C-A>", "<HOME>")
 
 -- Delete the character to the right of the cursor
 keymap.set("i", "<C-D>", "<DEL>")
