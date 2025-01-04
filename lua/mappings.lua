@@ -27,6 +27,9 @@ map('n', '<leader>7', '<cmd>lua require("harpoon.ui").nav_file(7)<CR>', opts) --
 keymap.set({ "n", "x" }, ";", ":")
 --map mt to run !make test
 map('n', 'mt', '<cmd>!make test<cr>', opts)
+map('n', 'cb', '<cmd>!cargo build<cr>', opts)
+map('n', 'cr', '<cmd>!cargo run<cr>', opts)
+map('n', 'rt', '<cmd>!cargo test<cr>', opts)
 -- Turn the word under cursor to upper case
 keymap.set("i", "<c-u>", "<Esc>viwUea")
 
@@ -178,6 +181,10 @@ keymap.set("n", "gb", '<cmd>call buf_utils#GoToBuffer(v:count, "forward")<cr>', 
 keymap.set("n", "gB", '<cmd>call buf_utils#GoToBuffer(v:count, "backward")<cr>', {
   desc = "go to buffer (backward)",
 })
+
+keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+
 
 -- Switch windows
 keymap.set("n", "<left>", "<c-w>h")

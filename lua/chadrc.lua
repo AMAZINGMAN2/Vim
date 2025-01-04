@@ -18,8 +18,8 @@ M.base46 = {
 M.ui = {
   theme = "onedark",
   tabufline = {
-    enabled = false,  -- Disable the tabline (tab bar)
-  },  -- Add a comma here
+    enabled = false,
+  },
   hl_override = {
     Comment = { italic = true },
     ["@comment"] = { italic = true },

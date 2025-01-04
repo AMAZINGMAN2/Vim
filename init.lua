@@ -1,5 +1,6 @@
 vim.g.base46_cache = vim.fn.stdpath "data" .. "/nvchad/base46/"
 vim.g.mapleader = " "
+vim.o.termguicolors = true
 vim.g.codeium_enabled = false
 vim.wo.relativenumber = true
 vim.wo.number = true
@@ -49,8 +50,6 @@ require("lazy").setup({
     end,
   },
 
-{ 'wakatime/vim-wakatime', lazy = false },
-  -- Add Harpoon
   {
     "ThePrimeagen/harpoon",
     config = function()
@@ -107,7 +106,6 @@ require("lazy").setup({
   },
 }, lazy_config)
 
--- load theme
 dofile(vim.g.base46_cache .. "defaults")
 dofile(vim.g.base46_cache .. "statusline")
 
