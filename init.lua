@@ -12,6 +12,7 @@ vim.o.shiftwidth = 4
 vim.g.loaded_netrw = 0
 vim.g.loaded_netrwPlugin = 0
 vim.g.codeium_os = "Linux"
+vim.api.nvim_create_user_command("W", "w !sudo tee % > /dev/null", {})
 -- bootstrap lazy and all plugins
 vim.g.loaded_netrw = 0
 vim.api.nvim_create_autocmd("BufEnter", {
@@ -29,6 +30,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 local lazy_config = require "configs.lazy"
 
+-- Inside init.lua or appropriate file to load after plugins
+-- require("custom.configs.lsp_config")
 -- load plugins
 require("lazy").setup({
   {
@@ -37,6 +40,41 @@ require("lazy").setup({
     branch = "v2.5",
     import = "nvchad.plugins",
   },
+{
+  "neovim/nvim-lspconfig",
+},
+{
+  "williamboman/mason.nvim",
+  build = ":MasonUpdate",
+  config = function()
+    require("mason").setup()
+  end,
+},
+{
+  "williamboman/mason-lspconfig.nvim",
+  dependencies = {
+    "williamboman/mason.nvim",
+    "neovim/nvim-lspconfig",
+    "hrsh7th/nvim-cmp",
+  },
+  config = function()
+    require("mason-lspconfig").setup({
+      ensure_installed = { "pyright" },
+    })
+
+    local lspconfig = require("lspconfig")
+    local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+    require("mason-lspconfig").setup_handlers({
+      function(server_name)
+        lspconfig[server_name].setup({
+          capabilities = capabilities,
+        })
+      end
+    })
+  end,
+},
+
   'tpope/vim-commentary',
   'mhartington/formatter.nvim',
   { import = "plugins" },
