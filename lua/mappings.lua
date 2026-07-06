@@ -5,12 +5,33 @@ local uv = vim.loop
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
+
 -- Telescope key mappings
-map('n', 'ff', '<cmd>Telescope find_files<cr>', opts)
+map('n', '<leader>ff', '<cmd>Telescope find_files<cr>', opts)
 map('n', 'gr', '<cmd>Telescope live_grep<cr>', opts)
 map('n', 'gre', '<cmd>Telescope live_grep<cr>', opts)
 map('n', 'ggg', '<cmd>Telescope buffers<cr>', opts)
 map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', opts)
+
+
+-- neotest mappings
+
+vim.keymap.set("n", "<leader>tn", function()
+  require("neotest").run.run()
+end)
+
+vim.keymap.set("n", "<leader>tf", function()
+  require("neotest").run.run(vim.fn.expand("%"))
+end)
+
+vim.keymap.set("n", "<leader>to", function()
+  require("neotest").output.open()
+end)
+
+vim.keymap.set("n", "<leader>tp", function()
+  require("neotest").output_panel.toggle()
+end)
+
 
 
 -- Harpoon key mappings
@@ -105,7 +126,7 @@ keymap.set({ "n", "x" }, "L", "g_")
 keymap.set("x", "<", "<gv")
 keymap.set("x", ">", ">gv")
 keymap.set("n","<leader>j", "<cmd>NvimTreeToggle<CR>")
--- keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
+keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
 -- Edit and reload nvim config file quickly
 keymap.set("n", "<leader>ev", "<cmd>tabnew $MYVIMRC <bar> tcd %:h<cr>", {
   silent = true,
@@ -259,3 +280,63 @@ keymap.set("n", "<leader>cb", function()
     cnt = cnt + 1
   end))
 end)
+
+
+
+
+vim.keymap.set("n", "<leader>mm", function()
+  local file = vim.fn.expand("%:t")
+  local name = vim.fn.expand("%:r")
+
+  print("FILE:", file)
+  print("NAME:", name)
+
+  vim.fn.jobstart({ "clang", "-lcs50", file, "-o", name }, {
+    on_exit = function(_, code)
+      print("COMPILE EXIT:", code)
+
+      if code ~= 0 then
+        print("compile failed")
+        return
+      end
+
+      print("RUNNING:", "./" .. name)
+
+      vim.fn.jobstart({ "./" .. name }, {
+        on_stdout = function(_, d)
+          if d then print(table.concat(d, "\n")) end
+        end,
+        on_stderr = function(_, d)
+          if d then print(table.concat(d, "\n")) end
+        end,
+      })
+    end,
+  })
+end)
+
+
+local terminal_buf = nil
+
+vim.keymap.set("n", "<C-t>", function()
+  -- create terminal if it doesn't exist
+  if not terminal_buf or not vim.api.nvim_buf_is_valid(terminal_buf) then
+    vim.cmd("enew")
+    terminal_buf = vim.api.nvim_get_current_buf()
+    vim.cmd("terminal")
+    vim.cmd("startinsert")
+    return
+  end
+
+  -- check if terminal is already visible
+  local wins = vim.fn.win_findbuf(terminal_buf)
+
+  if #wins > 0 then
+    -- just move focus away (DO NOT CLOSE)
+    vim.cmd("wincmd p")
+  else
+    -- open it in a split and reuse buffer
+    vim.cmd("split")
+    vim.api.nvim_win_set_buf(0, terminal_buf)
+    vim.cmd("startinsert")
+  end
+end, { desc = "persistent terminal toggle" })
